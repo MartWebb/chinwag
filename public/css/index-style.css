@@ -131,11 +131,28 @@ button:disabled {
 @media (max-width: 400px) {
     .centered-form-card {
         width: 300px;
+        height: 370px
+    }
+
+    .logo-title {
+        font-size: 1.8em;
+    }
+
+    .logo {
+        width: 1.9em;
+        height: 1.9em;
+        margin: 0 .8em;
     }
 
     .card-title {
         text-align: center;
         font-size: 1.5rem;
+        height: 10px;
     }
+
+    .label {
+        font-size: .8em;
+    }
+
 }
 
