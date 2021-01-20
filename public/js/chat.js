@@ -60,13 +60,11 @@ navigator.mediaDevices.getUserMedia({
 })
 
 socket.on('user-disconnected', peerId => {
-    console.log(peerId);
     if (peers[peerId]) peers[peerId].close();
 })
 
 myPeer.on('open', peerId => {
     socket.emit('join', { username, room, peerId }, (error) => {
-        console.log('owner peerId  ' + peerId)
         if (error) {
             alert(error);
             location.href = '/';
@@ -78,7 +76,6 @@ myPeer.on('open', peerId => {
 
 function connectToNewUser(peerId, stream) {
     const call = myPeer.call(peerId, stream);
-    console.log("connected to new user" + peerId)
     const video = document.createElement('video');
 
     call.on('stream', userVideoStream => {

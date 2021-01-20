@@ -26,14 +26,11 @@ io.on('connection', (socket) => {
     
     socket.on('join', ({ username, room, peerId }, callback) => {
         
-        
-        console.log(roomUsers)
-        console.log('owner peer ' + peerId)
         const { error, user } = addUser({ id: socket.id, username, room, peerId });
 
         if (roomUsers[user.room]) roomUsers[user.room].push({ id: user.id, name: user.username, video: true, audio: true });
         else roomUsers[user.room] = [{ id: user.id, name: user.username, video: true, audio: true }];
-        console.log('owner user.peer ' + user.peerId + " userId  " + user.id)
+
         if (error) {
            return callback(error);
         }
@@ -88,9 +85,7 @@ io.on('connection', (socket) => {
     })
 
     socket.on('sendMessage', (message, callback) => {
-        console.log(socket.id)
         const user = getUser(socket.id);
-        console.log(user.peerId)
         const filter = new Filter();
 
         if (filter.isProfane(message)) {

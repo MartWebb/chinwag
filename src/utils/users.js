@@ -23,18 +23,13 @@ const addUser = ({ id, username, room, peerId }) => {
     // const user = { id, username, room, peerId, video: true, audio: true };
     const user = { id, username, room, peerId };
     users.push(user);
-    users.forEach((user, index) => {
-        console.log('all users ' + user.id + " index " + index)
-    })
-    
     return { user };
 }
 
 const removeUser = (id) => {
     const index = users.findIndex((user) => user.id === id);
-    console.log(index + "user index to remove")
+
     if (index !== -1) {
-        console.log('found user to  delete')
         return users.splice(index, 1)[0];
     }
 }
