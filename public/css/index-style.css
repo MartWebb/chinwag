@@ -108,6 +108,7 @@ button:disabled {
     display: flex;
     padding: .6em;
     font-size: 1.2rem;
+    margin: 0;
 }
 .logo {
     width: 3em;
@@ -130,6 +131,7 @@ button:disabled {
 
 @media (max-width: 400px) {
     .centered-form-card {
+        margin-top: 1em;
         width: 300px;
         height: 370px
     }
