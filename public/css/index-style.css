@@ -37,6 +37,11 @@ h1 {
     /* padding: .6em; */
 }
 
+.card-title {
+    font-size: 2rem;
+    text-align: center;
+}
+
 header {
     border-bottom: 1px solid #000;
 }
@@ -85,8 +90,9 @@ button:disabled {
     /* box-shadow: 4px 4px 4px 4px #1D1F26;; */
     background: #fff;
     padding: 5em;
-    min-width: 300px;
+    min-width: 200px;
     border-radius: 5em;
+    margin: 0 2em;
 }
 
 .centered-form button {
@@ -122,4 +128,14 @@ button:disabled {
     color:  #7C5CBF;
 }
 
+@media (max-width: 400px) {
+    .centered-form-card {
+        width: 300px;
+    }
+
+    .card-title {
+        text-align: center;
+        font-size: 1.5rem;
+    }
+}
 
