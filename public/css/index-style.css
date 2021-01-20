@@ -130,6 +130,13 @@ button:disabled {
 }
 
 @media (max-width: 400px) {
+    .centered-form {
+        width: 100vw;
+        height: 85vh;   
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     .centered-form-card {
         margin-top: 1em;
         width: 300px;
