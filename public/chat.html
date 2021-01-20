@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ChinWag</title>
+        
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.14.0/css/all.css" />
+        <link rel="stylesheet" href="/css/chat.css">
+    </head>
+    <body>
+        <main class="chat" role="main">
+            <div class="chinwag-container screen-full">
+                <div class="main-video-container">
+                    <div id="video-grid"></div>
+                    <!-- <div id="share-screen"></div> -->
+                </div>
+                <div class="controls-area">
+                    <div class="control-block">
+                        <div class="control-button mute-btn" onclick="handleMicrophone()">
+                            <i class="fas fa-microphone"></i>
+                            <span>Mute</span>
+                        </div>
+                        <div class="control-button video-btn" onclick="handleVideo()">
+                            <i class="fas fa-video"></i>
+                            <span>Stop Video</span>
+                        </div>
+                    </div>
+                    <div class="control-block mid-block">
+                        <!-- <div class="control-button" onclick="handleInvite()">
+                            <i class="fad fa-user-plus"></i>
+                            <span>Invite</span>
+                        </div> -->
+                        <div class="control-button users-btn" onclick="handleScreen(this)">
+                            <i class="fas fa-user-friends"></i>
+                            <span>Participants</span>
+                        </div>
+                        <div class="control-button chat-btn" id="chats" onclick="handleScreen(this)">
+                            <i class="fas fa-comment-alt"></i>
+                            <span>Chat</span>
+                        </div>
+                    </div>
+                    <div class="control-block">
+                        <div class="control-button leave-btn">
+                            <span>Leave Meeting</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="side-bar screen-hide">
+                <div class="side-bar-render-area screen-hide" id="chat-side-bar">
+                    <div class="main-header">
+                        <h4>Chat Box</h4>
+                    </div>
+                    <div class="main-chat-box">
+                        <ul id="messages"></ul>
+                    </div>
+                    <form class="message-input-box">
+                        <textarea id="chat-message" cols="20" rows="1" placeholder="Type a message here"></textarea>
+                        <button class="message-send-btn" type="submit" id="send-btn">
+                            <i class="fas fa-paper-plane paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+                <div class="side-bar-render-area screen-hide" id="room-users-side-bar">
+                    <div class="main-header">
+                        <h4>Participants</h4>
+                    </div>
+                    <div class="room-users-box">
+                        <ul id="users"></ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.6.0/qs.min.js"></script>
+        <script src="https://unpkg.com/peerjs@1.2.0/dist/peerjs.min.js"></script>
+        <script src='/socket.io/socket.io.js'></script>
+        <script src="/js/chat.js"></script>
+    </body>
+</html>
