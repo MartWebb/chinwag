@@ -8,8 +8,7 @@ const { addUser, removeUser, getUser, getUsersInRoom } = require('./utils/users'
 
 
 const app = express();
-// create the raw http server that express 
-// normally does behind the scences and pass it to io
+
 const server = http.createServer(app);
 const io = socketio(server);
 
@@ -18,18 +17,12 @@ const publicDirectoryPath = path.join(__dirname, '../public');
 
 app.use(express.static(publicDirectoryPath));
 
-const roomUsers = {}
-// socket is an object with info about new connection
-// connection is  built in event
 io.on('connection', (socket) => {
     console.log('New WebSocket connection');
     
     socket.on('join', ({ username, room, peerId }, callback) => {
         
-        const { error, user } = addUser({ id: socket.id, username, room, peerId });
-
-        if (roomUsers[user.room]) roomUsers[user.room].push({ id: user.id, name: user.username, video: true, audio: true });
-        else roomUsers[user.room] = [{ id: user.id, name: user.username, video: true, audio: true }];
+        const { error, user } = addUser({ id: socket.id, username, room, peerId, video: true, audio: true });
 
         if (error) {
            return callback(error);
@@ -43,44 +36,51 @@ io.on('connection', (socket) => {
 
         socket.broadcast.to(user.room).emit('message', generateMessage('Admin',`${user.username} has joined.`, user.peerId));
 
-        io.in(room).emit("participants", roomUsers[user.room]);
-
-        io.to(user.room).emit('roomData', {
+        io.to(user.room).emit('participants', {
             room: user.room,
             users: getUsersInRoom(user.room)
         })
 
-
         callback();
 
         socket.on("mute-mic", () => {
-            roomUsers[user.room].forEach((roomUser) => {
+            getUsersInRoom(user.room).forEach((roomUser) => {
                 if (roomUser.id === user.id) return (roomUser.audio = false);
             });
-            io.in(user.room).emit("participants", roomUsers[user.room]);
+            io.to(user.room).emit('participants', {
+                room: user.room,
+                users: getUsersInRoom(user.room)
+            })
         });
 
         socket.on("unmute-mic", () => {
-            roomUsers[user.room].forEach((roomUser) => {
+            getUsersInRoom(user.room).forEach((roomUser) => {
                 if (roomUser.id === user.id) return (roomUser.audio = true);
             });
-            io.in(user.room).emit("participants", roomUsers[user.room]);
+            io.to(user.room).emit('participants', {
+                room: user.room,
+                users: getUsersInRoom(user.room)
+            })
         });
 
         socket.on("stop-video", () => {
-            const buttonUser = getUser(socket.id);
-            roomUsers[user.room].forEach((roomUser) => {
-                if (roomUser.id === buttonUser.id) return (roomUser.video = false);
+            getUsersInRoom(user.room).forEach((roomUser) => {
+                if (roomUser.id === user.id) return (roomUser.video = false);
             });
-            io.in(user.room).emit("participants", roomUsers[user.room]);
+            io.to(user.room).emit('participants', {
+                room: user.room,
+                users: getUsersInRoom(user.room)
+            })
         });
 
         socket.on("play-video", () => {
-            const buttonUser = getUser(socket.id);
-            roomUsers[user.room].forEach((roomUser) => {
-                if (roomUser.id === buttonUser.id) return (roomUser.video = true);
+            getUsersInRoom(user.room).forEach((roomUser) => {
+                if (roomUser.id === user.id) return (roomUser.video = true);
             });
-            io.in(user.room).emit("participants", roomUsers[user.room]);
+            io.to(user.room).emit('participants', {
+                room: user.room,
+                users: getUsersInRoom(user.room)
+            })
         });
     })
 
@@ -108,8 +108,6 @@ io.on('connection', (socket) => {
         } 
     })
 })
-
-
 
 server.listen(port, () => {
     console.log(`Server is  up on port ${port}.`);

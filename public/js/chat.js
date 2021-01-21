@@ -10,6 +10,8 @@ const myPeer = new Peer(undefined, {
 const $messageInput = document.querySelector('#chat-message'); ///(msg) - (chat-message)
 const $submitBtn = document.querySelector('#send-btn'); //(btn) - send-btn
 const $messages = document.querySelector('#messages'); 
+const chatScreen = document.getElementById("chat-side-bar");
+const usersScreen = document.getElementById("room-users-side-bar");
 
 // Options
 const { username, room } = Qs.parse(location.search, { ignoreQueryPrefix: true })
@@ -146,19 +148,36 @@ socket.on('message', (message) => {
     container.scrollTop = container.scrollHeight;
 })
 
-socket.on("participants", (users) => {
+socket.on("participants", ({room, users}) => {
     const container = document.querySelector(".room-users-box");
     const userId =  socket.id;
     const lists = document.getElementById("users");
     lists.innerHTML = "";
     lists.textContent = "";
+    console.log(users)
+    // users.forEach((user) => {
+        
+    //     const list = document.createElement("li");
+    //     list.className = "user";
+    //     list.innerHTML = `
+    //         <div class="user-avatar">${user.name[0].toUpperCase()}</div>
+    //         <span class="user-name">${user.name}${user.id == userId ? " (You)" : ""}</span>
+    //         <div class="user-media">
+    //             <i class="fas fa-microphone${user.audio === false ? "-slash" : ""}"></i>
+    //             <i class="fas fa-video${user.video === false ? "-slash" : ""}"></i>
+    //         </div>
+    //     `;
 
+    //     lists.append(list);
+    //     container.scrollTop = container.scrollHeight;
+    // });
     users.forEach((user) => {
+        
         const list = document.createElement("li");
         list.className = "user";
         list.innerHTML = `
-            <div class="user-avatar">${user.name[0].toUpperCase()}</div>
-            <span class="user-name">${user.name}${user.id == userId ? " (You)" : ""}</span>
+            <div class="user-avatar">${user.username[0].toUpperCase()}</div>
+            <span class="user-name">${user.username}${user.id == userId ? " (You)" : ""}</span>
             <div class="user-media">
                 <i class="fas fa-microphone${user.audio === false ? "-slash" : ""}"></i>
                 <i class="fas fa-video${user.video === false ? "-slash" : ""}"></i>
@@ -211,61 +230,38 @@ const handleVideo = () => {
         node.children[1].innerHTML = "Stop Video";
     }
 };
+const cleanUp = () => {
+    chatScreen.classList.remove("screen-hide");
+    usersScreen.classList.remove("screen-hide");
+}
+// const isHidden = (screen) => screen.classList.contains("screen-hide");
 
-const isHidden = (screen) => screen.classList.contains("screen-hide");
-
-const handleScreen = (screen) => {
-    const left_container = document.querySelector(".chinwag-container");
-    const right_container = document.querySelector(".side-bar");
-    const chatScreen = document.getElementById("chat-side-bar");
-    const usersScreen = document.getElementById("room-users-side-bar");
-
-    if (screen.id === "chats") {
-        handleActive("chat-btn");
-        if (activeSreen === "") {
-            chatScreen.classList.remove("screen-hide");
-            activeSreen = "chats";
-        } else if (activeSreen === "chats") {
-            chatScreen.classList.add("screen-hide");
-            activeSreen = "";
-        } else {
+document.querySelectorAll('[data-toggle-sidebar]').forEach(toggle => {
+    toggle.addEventListener('click', e => {
+        if (toggle.classList.contains('chat-btn')) {
+            cleanUp();
             chatScreen.classList.remove("screen-hide");
             usersScreen.classList.add("screen-hide");
-            activeSreen = "chats";
-            handleActive("users-btn");
-        }
-    } else {
-        handleActive("users-btn");
-        if (activeSreen === "") {
-            usersScreen.classList.remove("screen-hide");
-            activeSreen = "users";
-        } else if (activeSreen === "users") {
-            usersScreen.classList.add("screen-hide");
-            activeSreen = "";
         } else {
+            cleanUp();
             usersScreen.classList.remove("screen-hide");
             chatScreen.classList.add("screen-hide");
-            activeSreen = "users";
-            handleActive("chat-btn");
         }
-    }
-
-    if (isHidden(right_container)) {
-        right_container.classList.remove("screen-hide");
-        left_container.classList.remove("screen-full");
-    } else if (activeSreen === "") {
-        right_container.classList.add("screen-hide");
-        left_container.classList.add("screen-full");
-    }
-};
-
-const handleActive = (buttonClass) => {
-    const button = document.querySelector(`.${buttonClass}`);
-    const active = button.classList.contains("active-btn");
-
-    if (active) button.classList.remove("active-btn");
-    else button.classList.add("active-btn");
-};
+        // get the sidebar ID from the current element data attribute
+        const sidebarID = toggle.dataset.toggleSidebar;
+        
+        // check if there is an element on the doc with the id
+        const sidebarElement = sidebarID ? document.getElementById(sidebarID) : undefined;
+        // if there is a sidebar with the passed id (data-toggle-sidebar)
+        if (sidebarElement) {
+            // toggle the aria-hidden state of the given sidebar
+            let sidebarState = sidebarElement.getAttribute('aria-hidden');
+            sidebarElement.setAttribute('aria-hidden', sidebarState == 'true' ? false : true); 
+            
+        }
+    });  
+});
+ 
 
 document.querySelector(".leave-btn").addEventListener("click", endCall);
 

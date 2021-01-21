@@ -1,3 +1,4 @@
+/* General */
 * {
     margin: 0;
     padding: 0;
@@ -18,6 +19,54 @@ main {
 .side-bar {
     flex: 0.2;
 }
+
+/* Header */
+
+header {
+    border-bottom: 1px solid #000;
+    margin-bottom: 1em;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: .8em;
+}
+
+.logo-container {
+    display: flex;
+    font-family: 'Pattaya', sans-serif, Helvetica, Arial;
+    padding: .6em;
+    margin: 0;
+    height: 75px
+}
+
+.logo-title {
+    font-size: 3rem;
+}
+
+.logo {
+    width: 3em;
+    height: 3em;
+    margin: .3em 1em;
+    margin-right: 3em;
+}
+
+.leave-btn {
+    color: #eb534b;
+    padding: 8px 10px;
+    min-width: 80px;
+    cursor: pointer;
+    margin-top: 1.8em;
+    margin-right: 1.5em;
+    margin-right: 2em;
+}
+.leave-btn:hover,
+.leave-btn:focus {
+    color: #ffcccb;
+}
+
+/* Main container */
 
 .main-video-container {
     flex: 1;
@@ -46,7 +95,7 @@ main {
     display: grid;
     grid-template-columns: repeat(auto-fill, 300px);
     grid-auto-rows: 300px;
-    height: 200px;
+    height: 300px;
     border: 1px #000 solid;
     background-color: #000;
     margin: 1em 1em;
@@ -78,6 +127,11 @@ main {
     padding: 8px 10px;
     min-width: 80px;
     cursor: pointer;
+    padding-right: 2em;
+}
+
+.padding-left {
+    padding-left: 2em;
 }
 
 .control-button{
@@ -87,6 +141,7 @@ main {
 
 .control-button:hover {
     background-color: #343434;
+    color: #880088;
     border-radius: 5px;
 }
 
@@ -95,31 +150,72 @@ main {
     margin-bottom: 5px;
 }
 
-.mid-block {
+/* .mid-block {
     flex: 1;
-}
-
-.leave-btn {
-    color: #eb534b;
-    padding: 0 15px;
-}
+} */
 
 /* side bar */
 
-.side-bar {
+/* SIDEBAR POSITION */
+.sidebar {
+    /* background-color: #f1f1f1; */
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    min-width: 300px;
     display: flex;
     flex-direction: column;
-    background-color: rgba(255, 255, 255, .8);
+    background-color: rgba(255, 255, 255, 1);
     border-left: 1px solid #3d3d42;
-}
+  }
+  .sidebar__content {
+    padding: 8px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    /* width: 100%; */
+  }
 
+  /* SIDEBAR HIDDEN STATE */
+    .sidebar[aria-hidden="true"] {
+    transition: 200ms;
+    transform: translateX(100%);
+  }
+  /* SIDEBAR VISIBLE STATE */
+  .sidebar:not([aria-hidden]),
+  .sidebar[aria-hidden="false"] {
+    transition: 200ms;
+    transform: translateX(0);
+  }
+
+.sidebar-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1em;
+    background-color: #d2d2d2;
+    /* width: fit-content;
+    height: fit-content; */
+    border: 1px solid #000;
+    padding: 0.1em 0.5em;
+    outline: 0;
+}
+.sidebar-btn:hover,
+.sidebar-btn:focus {
+    background-color: #880088;
+}
 .main-header {
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+    /* justify-content: center; */
     color: #242324;
     text-align: center;
     margin-top: .8em;
     margin-bottom: 1em;
     padding-bottom: .5em;
     border-bottom: 1px #000 solid;
+    padding-right: 7em;
 }
 
 .side-bar-render-area {
@@ -140,7 +236,8 @@ main {
     align-items: center;
     justify-content: center;
     border-top: 1px solid #3d3d42;
-    padding: 12px;
+    padding: 0.3em;
+    width: 100%;
 }
 
 .message-input-box > textarea {
@@ -152,6 +249,7 @@ main {
     resize: none;
     height: 50px;
     padding-right: 15px;
+    padding-top: 1em;
 }
 
 .message-send-btn {
@@ -255,7 +353,7 @@ main {
 
 #messages > li.system-message > span {
     font-size: 12px;
-    color: var(--gray);
+    color: #808080;
     margin-bottom: 5px;
 }
 
@@ -323,7 +421,31 @@ main {
     margin-right: 12px;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 460px) {
+    header {
+        margin: 0;
+        padding: 0;
+        height: 49px;
+    }
+
+    .logo-container {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .logo-title {
+        font-size: 2rem;
+    }
+    
+    .logo {
+        width: 2em;
+        height: 2em;
+        margin: .3em 1em;
+        margin-right: 3em;
+    }
+    .leave-btn {
+        font-size: 4rem;
+    }
     #video-grid  {
         grid-template-columns: repeat(auto-fill, 250px);
         grid-auto-rows: 250px;
@@ -341,3 +463,4 @@ main {
         font-size: .5rem;
     }
 }
+

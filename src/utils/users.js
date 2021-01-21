@@ -1,6 +1,6 @@
 const users = [];
 
-const addUser = ({ id, username, room, peerId }) => {
+const addUser = ({ id, username, room, peerId, video, audio }) => {
     // Clean the data
     username = username.trim().toLowerCase();
     room = room.trim().toLowerCase();
@@ -20,8 +20,8 @@ const addUser = ({ id, username, room, peerId }) => {
         }
     }
 
-    // const user = { id, username, room, peerId, video: true, audio: true };
-    const user = { id, username, room, peerId };
+    const user = { id, username, room, peerId, video, audio };
+    // const user = { id, username, room, peerId };
     users.push(user);
     
     return { user };
