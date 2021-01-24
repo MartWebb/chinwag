@@ -448,24 +448,10 @@ header {
         font-size: 4rem;
     }
     #video-grid  {
-<<<<<<< HEAD
-        /* grid-template-columns: repeat(auto-fill, 250px);
-        grid-auto-rows: 250px;
-        justify-content: space-between; */
-        /* grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    grid-gap: 1em;
-    justify-content: space-evenly;
-    grid-auto-rows: 100px; */
-    }
-    video  {
-        width: 100px;
-        height: 100px;
-=======
         /* grid-template-columns: repeat(auto-fill, 250px); */
         
         /* grid-auto-rows: 250px; */
         
->>>>>>> 43b49922714deb7e5706fbe652f6a2b99d038b13
     }
     .controls-area {
         margin: 0;
