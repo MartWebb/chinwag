@@ -139,7 +139,10 @@ socket.on('message', (message) => {
     list.className = message.peerId === myID ? "message-right" : "message-left";
     
     list.innerHTML = `
-        ${message.peerId !== myID ? "<div class='message-avatar'>" + message.username[0].toUpperCase() + "</div>" : ""}
+        ${message.peerId !== myID ? 
+            "<div class='message-avatar'>" 
+            + message.username[0].toUpperCase() 
+            + "</div>" : ''}
         <div class="message-content">
             ${message.peerId !== myID ? "<span>" + message.username + "</span>" : ""}
             <div class="message-text"><span>${message.text}<span></div>

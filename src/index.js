@@ -89,7 +89,9 @@ io.on('connection', (socket) => {
         const filter = new Filter();
 
         if (filter.isProfane(message)) {
+            socket.emit('message',generateMessage('Admin', `HEY! ${user.username} keep it clean`));
             return callback('Profanity is not allowed!')
+            // socket.emit('no-profanity',)
         }
 
         io.to(user.room).emit('message', generateMessage(user.username, message, user.peerId));
