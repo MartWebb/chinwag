@@ -18,6 +18,7 @@ body {
     line-height: 1.4;
     color: #333333;
     font-family: 'Pattaya', sans-serif, Helvetica, Arial;
+    height: 85vh;   
 }
 
 /* Header */
@@ -51,7 +52,7 @@ header {
 .centered-form {
     background: #fff;
     width: 100vw;
-    height: 85vh;   
+    /* height: 85vh;    */
     display: flex;
     justify-content: center;
     align-items: center;

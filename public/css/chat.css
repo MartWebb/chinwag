@@ -4,6 +4,9 @@
     padding: 0;
     box-sizing: border-box;
 }
+body {
+    height:100vh;
+}
 
 .header-container {
     grid-area: header;
@@ -29,7 +32,7 @@
     "header header header header"
     "main   main   main   main"
     "footer footer footer footer";
-    height:100vh;
+    /* height:100vh; */
 }
 
 /* Header */
