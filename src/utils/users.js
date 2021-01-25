@@ -29,7 +29,6 @@ const addUser = ({ id, username, room, peerId, video, audio }) => {
 
 const removeUser = (id) => {
     const index = users.findIndex((user) => user.id === id);
-    console.log(index + "user index to remove")
     if (index !== -1) {
         console.log('found user to  delete')
         return users.splice(index, 1)[0];

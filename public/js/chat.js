@@ -1,9 +1,22 @@
 const socket = io("/");
 
+// const myPeer = new Peer(undefined, {
+//     host: 'peerjs-server.herokuapp.com', 
+//     secure: true, 
+//     port: 443
+// })
+let portVal = '3001';
+let secureVal = false;
+let hostVal = '/';
+if (location.port !== "3000") {
+    hostVal = 'peerjs-server.herokuapp.com'
+    secureVal = true;
+    portVal = '443'
+}
 const myPeer = new Peer(undefined, {
-    host: 'peerjs-server.herokuapp.com', 
-    secure: true, 
-    port: 443
+    host: hostVal, 
+    secure: secureVal,
+    port: portVal
 })
 
 // HTML Elements

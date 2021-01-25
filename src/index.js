@@ -17,11 +17,19 @@ const publicDirectoryPath = path.join(__dirname, '../public');
 
 app.use(express.static(publicDirectoryPath));
 
+app.get('/', (req, res) => {
+    res.redirect(`/${room}`)
+  })
+  
+  app.get('/:room', (req, res) => {
+    res.render('room', { room: req.params.room })
+  })
+
 io.on('connection', (socket) => {
     console.log('New WebSocket connection');
     
     socket.on('join', ({ username, room, peerId }, callback) => {
-        
+        console.log(room)
         const { error, user } = addUser({ id: socket.id, username, room, peerId, video: true, audio: true });
 
         if (error) {
