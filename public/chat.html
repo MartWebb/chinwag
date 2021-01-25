@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="/css/chat.css">
     </head>
     <body>
-        <main class="chat" role="main">
+        <!-- <main class="chat" role="main"> -->
             <div class="chinwag-container screen-full">
                 <header class="header-container">
                         <div class="logo-container">
@@ -24,13 +24,13 @@
                             </div>
                         </div>
                 </header>
-                <div class="main-video-container">
+                <main role='video display area' class="main-video-container">
                     <div id="video-grid"></div>
                     <!-- <div id="share-screen"></div> -->
-                </div>
-                <div class="controls-area">
+                </main>
+                <footer role="controls area" class="controls-area">
                     <div class="control-block ">
-                        <div class="control-button mute-btn padding-left" onclick="handleMicrophone()">
+                        <div class="control-button mute-btn" onclick="handleMicrophone()">
                             <i class="fas fa-microphone"></i>
                             <span class="mobile-hide">Mute</span>
                         </div>
@@ -38,12 +38,6 @@
                             <i class="fas fa-video"></i>
                             <span class="mobile-hide">Stop Video</span>
                         </div>
-                    </div>
-                    <!-- <div class="control-block mid-block"> -->
-                        <!-- <div class="control-button" onclick="handleInvite()">
-                            <i class="fad fa-user-plus"></i>
-                            <span>Invite</span>
-                        </div> -->
                         <div class="control-button users-btn"  data-toggle-sidebar="sidebar1" id="participants">
                             <i class="fas fa-user-friends"></i>
                             <span class="mobile-hide">Participants</span>
@@ -52,41 +46,50 @@
                             <i class="fas fa-comment-alt"></i>
                             <span class="mobile-hide">Chat</span>
                         </div>
+                    </div>
+                    <!-- <div class="control-block mid-block"> -->
+                        <!-- <div class="control-button" onclick="handleInvite()">
+                            <i class="fad fa-user-plus"></i>
+                            <span>Invite</span>
+                        </div> -->
+                        
                     <!-- </div> -->
                     <!-- <div class="control-block">
                         <div class="control-button leave-btn">
                             <span>Leave Meeting</span>
                         </div>
                     </div> -->
+                </footer>
+            </div>
+        <!-- </main> -->
+            <aside role="side bar" id="sidebar1" class="sidebar " aria-label="Main sidebar containing navigation links and some information" aria-hidden="true">
+                <div class="sidebar__content side-bar-render-area" id="chat-side-bar" >
+                    <!-- <div class=" " > -->
+                    <div class="side-bar-header">
+                        <button class="sidebar-btn" data-toggle-sidebar="sidebar1" aria-label="Toggle the document main sidebar visibility">X</button>
+                        <h4 class="side-bar-title">Chat Box</h4>
+                    </div>
+                    <div class="main-chat-box">
+                        <ul id="messages"></ul>
+                    </div>
+                    <form class="message-input-box">
+                        <textarea id="chat-message" cols="20" rows="1" placeholder="Type a message here"></textarea>
+                        <button class="message-send-btn" type="submit" id="send-btn">
+                            <i class="fas fa-paper-plane paper-plane"></i>
+                        </button>
+                    </form>
                 </div>
-            </div>
-        </main>
-    <div id="sidebar1" class="sidebar " aria-label="Main sidebar containing navigation links and some information" aria-hidden="true">
-        <div class="sidebar__content side-bar-render-area" id="chat-side-bar">
-            <div class="main-header">
-                <button class="sidebar-btn" data-toggle-sidebar="sidebar1" aria-label="Toggle the document main sidebar visibility">X</button>
-                <h4>Chat Box</h4>
-            </div>
-            <div class="main-chat-box">
-                <ul id="messages"></ul>
-            </div>
-            <form class="message-input-box">
-                <textarea id="chat-message" cols="20" rows="1" placeholder="Type a message here"></textarea>
-                <button class="message-send-btn" type="submit" id="send-btn">
-                    <i class="fas fa-paper-plane paper-plane"></i>
-                </button>
-            </form>
-        </div>
-            <div class="side-bar-render-area screen-hide" id="room-users-side-bar">
-                <div class="main-header">
-                    <button class="sidebar-btn" data-toggle-sidebar="sidebar1" aria-label="Toggle the document main sidebar visibility">X</button>
-                    <h4>Participants</h4>
-                </div>
-                <div class="room-users-box">
-                    <ul id="users"></ul>
-                </div>
-            </div>
-    </div>
+                    <div class="side-bar-render-area screen-hide" id="room-users-side-bar">
+                        <div class="side-bar-header extra-height">
+                            <button class="sidebar-btn extra-margin" data-toggle-sidebar="sidebar1" aria-label="Toggle the document main sidebar visibility">X</button>
+                            <h4 class="side-bar-title">Participants</h4>
+                        </div>
+                        <div class="room-users-box">
+                            <ul id="users"></ul>
+                        </div>
+                    </div>
+                <!-- </div> -->
+            </aside>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.6.0/qs.min.js"></script>
         <script src="https://unpkg.com/peerjs@1.2.0/dist/peerjs.min.js"></script>

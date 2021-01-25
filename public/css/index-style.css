@@ -158,15 +158,16 @@ button:disabled {
 
     /* Container */
     .centered-form {
-        width: 100vw;
+        min-width: 100vw;
         height: 85vh;   
         display: flex;
     }
 
     /* Card */
     .centered-form-card {
-        padding: 3em 3em;
-        margin-top: 1em;
+        padding: 2.2em 2.2em;
+        margin-top: .5em;
+        margin-bottom: 1em;
         max-width: 300px;
     }
 
@@ -183,6 +184,7 @@ button:disabled {
         font-size: .6rem;
     }
     
+    /* footer */
     .credits {
         height: 5vh;
     }
