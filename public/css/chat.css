@@ -17,7 +17,6 @@
 
 .controls-area {
     grid-area: footer;
-    /* display: flex; */
 }
 
 .chinwag-container {
@@ -101,7 +100,7 @@ header {
     height: 100%;
     object-fit: cover;
     border: 1px #000 solid;
-    background-color: #000;
+    /* background-color: #000; */
   }
 
   /* Controls */

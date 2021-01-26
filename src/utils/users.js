@@ -21,7 +21,7 @@ const addUser = ({ id, username, room, peerId, video, audio }) => {
     }
 
     const user = { id, username, room, peerId, video, audio };
-    // const user = { id, username, room, peerId };
+    
     users.push(user);
     
     return { user };
@@ -30,7 +30,6 @@ const addUser = ({ id, username, room, peerId, video, audio }) => {
 const removeUser = (id) => {
     const index = users.findIndex((user) => user.id === id);
     if (index !== -1) {
-        console.log('found user to  delete')
         return users.splice(index, 1)[0];
     }
 }
@@ -47,5 +46,5 @@ module.exports = {
     addUser,
     removeUser,
     getUser,
-    getUsersInRoom
+    getUsersInRoom,
 }
